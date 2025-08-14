@@ -12,3 +12,12 @@ CREATE TABLE IF NOT EXISTS media (
   recommendation ENUM('Cracked', 'Wack') NOT NULL,
   review text
 );
+
+INSERT INTO media (title, watched, media_type, recommendation, review)
+VALUES (
+  'How to Train Your Dragon (Live Action)',
+  TRUE,
+  'movie',
+  'Cracked',
+  "It's alright for a live action. It's good for the kids"
+);
