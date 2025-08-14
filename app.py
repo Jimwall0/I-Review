@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template
 from marshmallow import Schema, fields
 import mysql.connector
 
@@ -12,16 +12,16 @@ db = mysql.connector.connect(
 )
 
 
-class media_schema(Schema):
+class MediaSchema(Schema):
     id = fields.Int()
     title = fields.Str(required=True)
-    watched = fields.Bool()
+    watched = fields.Str()
     media_type = fields.Str()
     recommendation = fields.Str()
     review = fields.Str()
 
 
-media = media_schema(many=True)
+media = MediaSchema(many=True)
 
 
 @app.route('/media', methods=['GET'])
@@ -30,8 +30,8 @@ def get_media():
     cursor.execute("SELECT * FROM media")
     media_list = cursor.fetchall()
     cursor.close()
-    result = media.dump(media_list)
-    return jsonify(result)
+    serialized_media = media.dump(media_list)
+    return render_template('index.html', media=serialized_media)
 
 
 @app.route('/')
