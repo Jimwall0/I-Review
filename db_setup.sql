@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS media (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   watched BOOLEAN DEFAULT FALSE,
-  type ENUM('movie', 'show') NOT NULL,
-  type ENUM('Cracked', 'Wack') NOT NULL,
-  review text,
+  media_type ENUM('movie', 'show') NOT NULL,
+  recommendation ENUM('Cracked', 'Wack') NOT NULL,
+  review text
 );
