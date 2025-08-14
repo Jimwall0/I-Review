@@ -36,7 +36,7 @@ def get_media():
 
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    return 'Go to /media'
 
 
 if __name__ == '__main__':
