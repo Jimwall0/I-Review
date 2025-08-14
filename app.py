@@ -1,9 +1,17 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+import mysql.connector
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlclient://username:password@localhost/database_name'
-db = SQLAlchemy(app)
 
-class media(db.model):
-  
+db=mysql.connector.connect(
+  host='localhost',
+  user='Andy',
+  password='@ver@g3V#1w3r',
+  database='media_catalog',
+)
+
+app.route('/')
+def index():
+  return 'Hello, World!'
+
+app.run(debug=True)
