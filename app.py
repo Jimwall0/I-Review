@@ -10,10 +10,11 @@ db = mysql.connector.connect(
   database='media_catalog',
 )
 
+
 @app.route('/')
 def index():
     return 'Hello, World!'
 
 
 if __name__ == '__main__':
-  app.run(debug=True)
+    app.run(debug=True)
