@@ -51,14 +51,14 @@ def post_media():
     logger.debug(f"Recieved data: {data}")
     query = """
     INSERT INTO media (title, release_date, watched, media_type, review)
-    VALUES (%s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s)
     """
     values = (
         data['title'],
         data['release_date'],
         data['watched'],
         data['media_type'],
-        data['review']
+        data['review'],
     )
     try:
         cursor = db.cursor()
