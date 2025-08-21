@@ -34,6 +34,16 @@ def get_media():
     return render_template('index.html', media=serialized_media)
 
 
+@app.route('/media/:id', methods=['GET'])
+def get_ip():
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT ${id} FROM media")
+    target = cursor.fetchall()
+    cursor.close()
+    serialized = media.dump(target)
+    return render_template('index.html', media=serialized)
+
+
 @app.route('/')
 def index():
     return 'Go to /media'

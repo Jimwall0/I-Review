@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS media;
 CREATE TABLE IF NOT EXISTS media (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
+  release INT NOT NULL,
   watched ENUM('not watched', 'watched'),
   media_type ENUM('movie', 'show') NOT NULL,
   recommendation ENUM('Cracked', 'Wack') NOT NULL,
@@ -17,6 +18,7 @@ CREATE TABLE IF NOT EXISTS media (
 INSERT INTO media (title, watched, media_type, recommendation, review)
 VALUES (
   'How to Train Your Dragon (Live Action)',
+  2025,
   'watched',
   'movie',
   'Cracked',
