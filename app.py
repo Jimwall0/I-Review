@@ -74,7 +74,7 @@ def post_media():
 
 @app.route('/')
 def index():
-    return 'Go to /media'
+    return 'Working go to /media', 200
 
 
 if __name__ == '__main__':
