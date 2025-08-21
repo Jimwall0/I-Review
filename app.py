@@ -44,8 +44,32 @@ def get_media():
 
 @app.route('/add_media', methods=['POST'])
 def post_media():
+    if not request.is_json:
+        logger.warning("Invalid Content-Type")
+        return jsonify({"error": "Content-Type must be application/json"}), 415
     data = request.get_json()
     logger.debug(f"Recieved data: {data}")
+    query = """
+    INSERT INTO media (title, release_date, watched, media_type, review)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    """
+    values = (
+        data['title'],
+        data['release_date'],
+        data['watched'],
+        data['media_type'],
+        data['review']
+    )
+    try:
+        cursor = db.cursor()
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+        logger.info("New media added to database.")
+        return jsonify({"message": "Media added successfully!"}), 201
+    except Exception as e:
+        logger.error(f"Error inserting media: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/')
