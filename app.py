@@ -31,11 +31,11 @@ def get_media():
     media_list = cursor.fetchall()
     cursor.close()
     serialized_media = media.dump(media_list)
-    return render_template('index.html', media=serialized_media)
+    return render_template('index.html', media=serialized_media), 200
 
 
 @app.route('/media/:id', methods=['GET'])
-def get_ip():
+def get_id():
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT ${id} FROM media")
     target = cursor.fetchall()
