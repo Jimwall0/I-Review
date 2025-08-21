@@ -8,19 +8,17 @@ DROP TABLE IF EXISTS media;
 CREATE TABLE IF NOT EXISTS media (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  release DATE,
-  watched ENUM('not watched', 'watched'),
+  release_date DATE NOT NULL,
+  watched ENUM('not watched', 'watched') NOT NULL,
   media_type ENUM('movie', 'show') NOT NULL,
-  recommendation ENUM('Cracked', 'Wack') NOT NULL,
   review text
 );
 
-INSERT INTO media (title, watched, media_type, recommendation, review)
+INSERT INTO media (title, release_date, watched, media_type, review)
 VALUES (
-  'How to Train Your Dragon (Live Action)',
-  2025-06-13,
+  'How to Train Your Dragon',
+  '2025-06-13',
   'watched',
   'movie',
-  'Cracked',
   "It's alright for a live action. It's good for the kids"
 );

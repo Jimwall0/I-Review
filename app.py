@@ -1,6 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from marshmallow import Schema, fields
 import mysql.connector
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler('app.log')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 app = Flask(__name__)
 
@@ -34,14 +42,10 @@ def get_media():
     return render_template('index.html', media=serialized_media), 200
 
 
-@app.route('/media/:id', methods=['GET'])
-def get_id():
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT ${id} FROM media")
-    target = cursor.fetchall()
-    cursor.close()
-    serialized = media.dump(target)
-    return render_template('index.html', media=serialized)
+@app.route('/add_media', methods=['POST'])
+def post_media():
+    data = request.get_json()
+    logger.debug(f"Recieved data: {data}")
 
 
 @app.route('/')
